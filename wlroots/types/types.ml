@@ -112,6 +112,7 @@ module Make (S : Cstubs_structs.TYPE) = struct
     let events_destroy = field t "events.destroy" Wl_signal.t
     let events_frame = field t "events.frame" Wl_signal.t
     let transform_matrix = field t "transform_matrix" (array 16 float)
+    let renderer = field t "renderer" Renderer.t
 
     (* TODO *)
     let () = seal t
@@ -126,10 +127,10 @@ module Make (S : Cstubs_structs.TYPE) = struct
   module Key_state = struct
     type t = Released | Pressed
 
-    let _RELEASED = constant "WLR_KEY_RELEASED" int64_t
-    let _PRESSED = constant "WLR_KEY_PRESSED" int64_t
+    let _RELEASED = constant "WLR_BUTTON_RELEASED" int64_t
+    let _PRESSED = constant "WLR_BUTTON_PRESSED" int64_t
 
-    let t : t typ = enum "wlr_key_state" [
+    let t : t typ = enum "wlr_button_state" [
       Released, _RELEASED;
       Pressed, _PRESSED;
     ]

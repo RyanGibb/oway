@@ -197,7 +197,7 @@ module Backend : sig
   val start : t -> bool
   val destroy : t -> unit
 
-  val get_renderer : t -> Renderer.t
+  val renderer_autocreate : t -> Renderer.t
 
   val signal_new_output : t -> Output.t Wl.Signal.t
   val signal_new_input : t -> Input_device.t Wl.Signal.t

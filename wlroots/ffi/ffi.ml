@@ -196,11 +196,11 @@ struct
 
   let wlr_backend_p = ptr Backend.t
 
-  let wlr_backend_get_renderer = foreign "wlr_backend_get_renderer"
+  let wlr_renderer_autocreate = foreign "wlr_renderer_autocreate"
       (wlr_backend_p @-> returning wlr_renderer_p)
 
   let wlr_backend_autocreate = foreign "wlr_backend_autocreate"
-      (wl_display_p @-> Backend.renderer_create_func_t @-> returning wlr_backend_p)
+      (wl_display_p @-> returning wlr_backend_p)
 
   let wlr_backend_start = foreign "wlr_backend_start"
       (wlr_backend_p @-> returning bool)

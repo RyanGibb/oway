@@ -14,6 +14,9 @@ let stubgen_prologue ="
 #include <wlr/types/wlr_pointer.h>
 #include <wlr/types/wlr_seat.h>
 #include <wlr/types/wlr_xcursor_manager.h>
+#include <wlr/types/wlr_tablet_tool.h>
+#include <wlr/types/wlr_tablet_pad.h>
+#include <wlr/types/wlr_touch.h>
 #include <wlr/backend.h>
 #include <wlr/util/log.h>
 #include <wlr/types/wlr_xdg_shell.h>

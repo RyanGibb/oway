@@ -39,6 +39,8 @@
               wayland
               udev
               pixman
+              wayland-protocols
+              wlroots
             ];
           });
         };

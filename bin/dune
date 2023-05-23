@@ -2,3 +2,7 @@
  (public_name oway)
  (name main)
  (libraries oway wlroots xkbcommon tgls.tgl3))
+
+(env
+ (dev
+   (flags (:standard -w -69))))
