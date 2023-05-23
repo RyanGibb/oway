@@ -1,4 +1,4 @@
 (executable
  (public_name oway)
  (name main)
- (libraries oway))
+ (libraries oway wlroots xkbcommon tgls.tgl3))

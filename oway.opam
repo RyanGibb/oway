@@ -13,6 +13,9 @@ depends: [
   "ocaml"
   "dune" {>= "3.7"}
   "odoc" {with-doc}
+  "tgls"
+  "xkbcommon"
+  "wlroots"
 ]
 build: [
   ["dune" "subst"] {dev}
@@ -29,3 +32,7 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/RyanGibb/oway.git"
+pin-depends: [
+  ["wlroots.dev" "git+https://github.com/sway/wlroots-ocaml.git#a4a36121a331c14b0f2ab363a6a59065513985e5"]
+  ["xkbcommon.dev" "git+https://github.com/Armael/ocaml-xkbcommon.git#af0cd8c938938db3e67b65ac13b6444102756ba0"]
+]

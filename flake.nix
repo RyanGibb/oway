@@ -30,11 +30,21 @@
         query = {
           ocaml-base-compiler = "*";
         };
+        overlay = final: prev: {
+          "xkbcommon" = prev."xkbcommon".overrideAttrs (_: {
+            buildInputs = [ pkgs.libxkbcommon ];
+          });
+          "wlroots" = prev."wlroots".overrideAttrs (_: {
+            buildInputs = [ pkgs.wlroots ];
+          });
+        };
         resolved-scope =
           # recursive finds vendored dependancies in duniverse
-          opam-nix-lib.buildOpamProject' { recursive = true; } ./. (query // devPackagesQuery);
+          let scope = opam-nix-lib.buildOpamProject' { recursive = true; } ./. (query // devPackagesQuery); in
+          scope.overrideScope' overlay;
         materialized-scope =
-          opam-nix-lib.materializedDefsToScope { sourceMap.${package} = ./.; } ./package-defs.json;
+          let scope = opam-nix-lib.materializedDefsToScope { sourceMap.${package} = ./.; } ./package-defs.json; in
+          scope.overrideScope' overlay;
       in rec {
         packages = rec {
           resolved = resolved-scope;
