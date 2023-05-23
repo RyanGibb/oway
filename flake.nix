@@ -34,8 +34,8 @@
           "xkbcommon" = prev."xkbcommon".overrideAttrs (_: {
             buildInputs = [ pkgs.libxkbcommon ];
           });
-          "wlroots" = prev."wlroots".overrideAttrs (_: {
-            buildInputs = [ pkgs.wlroots ];
+          ${package} = prev.${package}.overrideAttrs (_: {
+            buildInputs = [ pkgs.wlroots pkgs.wayland-scanner ];
           });
         };
         resolved-scope =
@@ -68,7 +68,8 @@
             dev-scope =
               # don't pick up duniverse deps
               # it can be slow to build vendored dependancies in a deriviation before getting an error
-              opam-nix-lib.buildOpamProject' { } ./. (query // devPackagesQuery);
+              let scope = opam-nix-lib.buildOpamProject' { } ./. (query // devPackagesQuery); in
+              scope.overrideScope' overlay;
           in rec {
             resolved = mkDevShell resolved-scope;
             materialized = mkDevShell materialized-scope;
