@@ -23,9 +23,6 @@ depends: [
   "base" { build }
   "stdio" { build }
 ]
-depexts: [
-  ["wlroots"] {os-family = "debian"}
-]
 build: [
   ["dune" "subst"] {dev}
   [

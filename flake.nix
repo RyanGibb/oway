@@ -35,7 +35,11 @@
             buildInputs = [ pkgs.libxkbcommon ];
           });
           ${package} = prev.${package}.overrideAttrs (_: {
-            buildInputs = [ pkgs.wlroots pkgs.wayland-scanner ];
+            buildInputs = with pkgs; [
+              wayland
+              udev
+              pixman
+            ];
           });
         };
         resolved-scope =
