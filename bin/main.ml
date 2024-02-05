@@ -110,12 +110,12 @@ let () =
   let renderer = Backend.renderer_autocreate backend in
   assert (Renderer.init_wl_display renderer display);
 
-  let _compositor = Compositor.create display renderer in
+  let _compositor = Compositor.create display 5 renderer in
   let _data_manager = Data_device.Manager.create display in
 
   let output_layout = Output_layout.create () in
 
-  let xdg_shell = Xdg_shell.create display in
+  let xdg_shell = Xdg_shell.create display 3 in
 
   let cursor = Cursor.create () in
   Cursor.attach_output_layout cursor output_layout;

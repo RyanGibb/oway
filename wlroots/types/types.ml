@@ -138,7 +138,7 @@ module Make (S : Cstubs_structs.TYPE) = struct
 
   module Event_keyboard_key = struct
     type t = [`event_keyboard_key] Ctypes.structure
-    let t : t typ = structure "wlr_event_keyboard_key"
+    let t : t typ = structure "wlr_keyboard_key_event"
     let time_msec = field t "time_msec" uint32_t
     let keycode = field t "keycode" int
     let update_state = field t "update_state" bool
@@ -163,28 +163,28 @@ module Make (S : Cstubs_structs.TYPE) = struct
 
   module Event_pointer_motion = struct
     type t = [`event_pointer_motion] Ctypes.structure
-    let t : t typ = structure "wlr_event_pointer_motion"
+    let t : t typ = structure "wlr_pointer_motion_event"
 
     let () = seal t
   end
 
   module Event_pointer_motion_absolute = struct
     type t = [`event_pointer_motion_absolute] Ctypes.structure
-    let t : t typ = structure "wlr_event_pointer_motion_absolute"
+    let t : t typ = structure "wlr_pointer_motion_absolute_event"
 
     let () = seal t
   end
 
   module Event_pointer_button = struct
     type t = [`event_pointer_button] Ctypes.structure
-    let t : t typ = structure "wlr_event_pointer_button"
+    let t : t typ = structure "wlr_pointer_button_event"
 
     let () = seal t
   end
 
   module Event_pointer_axis = struct
     type t = [`event_pointer_axis] Ctypes.structure
-    let t : t typ = structure "wlr_event_pointer_axis"
+    let t : t typ = structure "wlr_pointer_axis_event"
 
     let () = seal t
   end
@@ -241,11 +241,6 @@ module Make (S : Cstubs_structs.TYPE) = struct
     let vendor = field t "vendor" int
     let product = field t "product" int
     let name = field t "name" string
-    let keyboard = field t "keyboard" (ptr Keyboard.t)
-    let pointer = field t "pointer" (ptr Pointer.t)
-    let touch = field t "touch" (ptr Touch.t)
-    let tablet = field t "tablet" (ptr Tablet.t)
-    let tablet_pad = field t "tablet_pad" (ptr Tablet_pad.t)
 
     let events_destroy = field t "events.destroy" Wl_signal.t
 
@@ -269,6 +264,13 @@ module Make (S : Cstubs_structs.TYPE) = struct
         (Foreign.funptr_opt
            (ptr void @-> int @-> ptr void @-> ptr void @-> int @->
             returning (ptr Renderer.t)))
+  end
+
+  module Session = struct
+    type t = [`backend] Ctypes.structure
+    let t : t typ = structure "wlr_session"
+    (* TODO fill in struct entries *)
+    let () = seal t
   end
 
   module Data_device_manager = struct

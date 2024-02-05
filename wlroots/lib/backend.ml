@@ -8,7 +8,8 @@ type t = Types.Backend.t ptr
 include Ptr
 
 let autocreate dpy =
-  let b = Bindings.wlr_backend_autocreate dpy in
+  (* TODO get returned Session *)
+  let b = Bindings.wlr_backend_autocreate dpy Ctypes.(coerce (ptr void) (ptr (ptr Types.Session.t)) null) in
   if is_null b then failwith "Failed to create backend";
   b
 
