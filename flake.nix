@@ -41,6 +41,7 @@
               pixman
               wayland-protocols
               wlroots
+              libxkbcommon
             ];
           });
         };
